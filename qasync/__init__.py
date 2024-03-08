@@ -149,6 +149,9 @@ class _QThreadWorker(QtCore.QThread):
                 else:
                     self._logger.debug("Setting Future result: %s", r)
                     future.set_result(r)
+                finally:
+                    # Release potential reference
+                    r = None  # noqa
             else:
                 self._logger.debug("Future was canceled")
 
